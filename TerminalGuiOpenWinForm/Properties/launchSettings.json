@@ -1,0 +1,13 @@
+{
+  "profiles": {
+    "TerminalGuiOpenWinForm": {
+      "commandName": "Project"
+    },
+    "WSL : Default": {
+      "commandName": "Executable",
+      "distributionName": "Default",
+      "executablePath": "wsl",
+      "commandLineArgs": "dotnet TerminalGuiOpenWinForm.dll"
+    }
+  }
+}
