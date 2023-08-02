@@ -1,15 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using Terminal.Gui;
-using System.Windows.Forms;
+﻿using System.Diagnostics;
+using System.Runtime.InteropServices;
 
 namespace TerminalGuiOpenWinForm
 {
-    class Program : System.Windows.Forms.Form
+    public static class Program
     {
+        public static bool _loggedIn;
+
         static void Main(string[] args)
         {
             Terminal.Gui.Application.Init();
@@ -20,6 +17,18 @@ namespace TerminalGuiOpenWinForm
 
             // Before the application exits, reset Terminal.Gui for clean shutdown
             Terminal.Gui.Application.Shutdown();
+
+            if (_loggedIn)
+            {
+                var folderSep = RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ? @"\" : "/";
+                ProcessStartInfo info = new ProcessStartInfo()
+                {
+                    FileName = $"..{folderSep}..{folderSep}..{folderSep}..{folderSep}WinFormsApp1{folderSep}bin{folderSep}Debug{folderSep}net6.0-windows{folderSep}WinFormsApp1.exe",
+                    UseShellExecute = true,
+
+                };
+                Process.Start(info);
+            }
         }
     }
 

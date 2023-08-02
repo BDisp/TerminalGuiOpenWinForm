@@ -1,5 +1,4 @@
 ﻿using Terminal.Gui;
-using WinFormsApp1;
 
 namespace TerminalGuiOpenWinForm
 {
@@ -21,7 +20,7 @@ namespace TerminalGuiOpenWinForm
                 Text = "Username:"
             };
 
-            usernameText = new TextField("")
+            usernameText = new TextField()
             {
                 // Position text field adjacent to the label
                 X = Pos.Right(usernameLabel) + 1,
@@ -37,7 +36,7 @@ namespace TerminalGuiOpenWinForm
                 Y = Pos.Bottom(usernameLabel) + 1
             };
 
-            var passwordText = new TextField("")
+            var passwordText = new TextField()
             {
                 Secret = true,
                 // align with the text box above
@@ -56,8 +55,6 @@ namespace TerminalGuiOpenWinForm
                 IsDefault = true,
             };
 
-            var frmNewForm = new Form1();
-            var newThread = new System.Threading.Thread(frmNewFormThread);
             // When login button is clicked display a message popup then Windows Form
             btnLogin.Clicked += () => {
                 if (usernameText.Text == "admin" && passwordText.Text == "password")
@@ -65,12 +62,7 @@ namespace TerminalGuiOpenWinForm
                     MessageBox.Query("Logging In", "Login Successful", "Ok");
                     Application.RequestStop();
 
-
-                    newThread.SetApartmentState(System.Threading.ApartmentState.STA);
-                    newThread.Start();
-
-                    //System.Windows.Forms.Application.Run(new Form1());
-
+                    Program._loggedIn = true;
                 }
                 else
                 {
@@ -84,15 +76,6 @@ namespace TerminalGuiOpenWinForm
 
             // Add the views to the Window
             Add(usernameLabel, usernameText, passwordLabel, passwordText, btnLogin);
-
-
-            //method to open winform in separate process/thread
-            void frmNewFormThread()
-            {
-
-                System.Windows.Forms.Application.Run(frmNewForm);
-
-            }
 
         }
     }
