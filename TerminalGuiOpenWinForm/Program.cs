@@ -28,6 +28,8 @@ namespace TerminalGuiOpenWinForm
 
                 };
                 Process.Start(info);
+
+                Task.Delay(1000).Wait();
             }
         }
     }
